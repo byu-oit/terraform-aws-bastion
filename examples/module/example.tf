@@ -1,6 +1,5 @@
 module "bastion" {
-  #source            = "git@github.com:byu-oit/terraform-aws-bastion.git?ref=v1.0.0"
-  source            = "git@github.com:byu-oit/terraform-aws-bastion.git"
+  source            = "git@github.com:byu-oit/terraform-aws-bastion.git?ref=v1.0.0"
   env               = "prd"
   vpc_vpn_to_campus = true
   netid             = "mynetid"
