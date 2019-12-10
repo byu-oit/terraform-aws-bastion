@@ -17,3 +17,9 @@ variable "public_key" {
   type        = string
   description = "Public SSH Key (e.g. \"ssh-rsa AA....Qw== comment\")."
 }
+
+variable "ingress_cidrs" {
+	type = list(string)
+	default = ["128.187.0.0/16"]
+	description = "IP Address Ranges that should have access to the bastion."
+}
