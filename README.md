@@ -30,7 +30,7 @@ In a clean directory, create a `main.tf` file that looks like:
 
 ```hcl
 module "bastion" {
-  source            = "git@github.com:byu-oit/terraform-aws-bastion.git?ref=v1.0.1"
+  source            = "git@github.com:byu-oit/terraform-aws-bastion.git?ref=v1.0.2"
   env               = "prd"
   vpc_vpn_to_campus = true
   netid             = "mynetid"
@@ -74,6 +74,9 @@ The bastion is really intended to be ephemeral (spin it up, use it, tear it down
 | Name | Description |
 | --- | --- |
 | connect | SSH connection details for the bastion |
+| ec2_instance | The bastion EC2 Instance |
+| security_group | The security group that controls access to the bastion |
+| key_pair | The SSH keypair assigned to the bastion |
 
 ## Resources
 * An EC2 Instance (the bastion) in a public subnet
