@@ -5,7 +5,7 @@ variable "env" {
 
 variable "vpc_vpn_to_campus" {
   type        = bool
-  description = "Retrieve VPC info for the VPC that has VPN access to campus."
+  description = "Set to true if the bastion needs to be in the VPC that has VPN access to campus."
 }
 
 variable "netid" {
