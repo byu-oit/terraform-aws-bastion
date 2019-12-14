@@ -65,7 +65,7 @@ The bastion is really intended to be ephemeral (spin it up, use it, tear it down
 | Name | Description | Default Value |
 | --- | --- | --- |
 | env | Environment of the AWS Account (for finding the shared VPC and tagging the bastion) (e.g. dev, prd)|  |
-| vpc_vpn_to_campus | Retrieve VPC info for the VPC that has VPN access to campus | false |
+| vpc_vpn_to_campus | Set to true if the bastion needs to be in the VPC that has VPN access to campus | false |
 | netid | Your Net ID (for naming the bastion) | |
 | public_key | Public SSH Key (e.g. \"ssh-rsa AA....Qw== comment\"). | |
 | ingress_cidrs | IP Address Ranges that should have access to the bastion. | ["128.187.0.0/16"] |
