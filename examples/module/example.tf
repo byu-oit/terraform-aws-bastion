@@ -1,5 +1,11 @@
+provider "aws" {
+  version = "~> 2.42"
+  region  = "us-west-2"
+}
+
 module "bastion" {
-	source            = "git@github.com:byu-oit/terraform-aws-bastion.git?ref=v1.0.3"
+	#source            = "git@github.com:byu-oit/terraform-aws-bastion.git?ref=v1.0.3"
+	source            = "../../"
   env               = "prd"
   vpc_vpn_to_campus = true
   netid             = "mynetid"

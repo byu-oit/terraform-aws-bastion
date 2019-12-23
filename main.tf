@@ -1,10 +1,8 @@
 terraform {
   required_version = ">= 0.12.16"
-}
-
-provider "aws" {
-  version = ">= 2.38.0"
-  region  = "us-west-2"
+  required_providers {
+    aws = ">= 2.42"
+  }
 }
 
 module "acs" {

@@ -29,6 +29,11 @@ Alternatively, you can use this template as a module. This way you don't have to
 In a clean directory, create a `main.tf` file that looks like:
 
 ```hcl
+provider "aws" {
+  version = "~> 2.42.0"
+  region  = "us-west-2"
+}
+
 module "bastion" {
   source            = "git@github.com:byu-oit/terraform-aws-bastion.git?ref=v1.0.3"
   env               = "prd"
