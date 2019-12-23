@@ -8,7 +8,7 @@ provider "aws" {
 }
 
 module "acs" {
-  source            = "git@github.com:byu-oit/terraform-aws-acs-info.git?ref=v1.0.2"
+  source            = "git@github.com:byu-oit/terraform-aws-acs-info.git?ref=v1.1.0"
   env               = var.env
   vpc_vpn_to_campus = var.vpc_vpn_to_campus
 }
