@@ -6,7 +6,8 @@ terraform {
 }
 
 module "acs" {
-  source            = "git@github.com:byu-oit/terraform-aws-acs-info.git?ref=v1.1.0"
+  source            = "git@github.com:byu-oit/terraform-aws-acs-info.git?ref=v1.2.2"
+  dept_abbr         = var.dept_abbr
   env               = var.env
   vpc_vpn_to_campus = var.vpc_vpn_to_campus
 }
