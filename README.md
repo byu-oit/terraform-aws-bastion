@@ -1,3 +1,5 @@
+![Latest GitHub Release](https://img.shields.io/github/v/release/byu-oit/terraform-aws-bastion?sort=semver)
+
 # terraform-aws-bastion
 Create a temporary bastion in an AWS Account
 
@@ -35,7 +37,7 @@ provider "aws" {
 }
 
 module "bastion" {
-  source            = "git@github.com:byu-oit/terraform-aws-bastion.git?ref=v1.1.1"
+  source            = "github.com/byu-oit/terraform-aws-bastion.git?ref=v1.1.2"
   env               = "prd"
   vpc_vpn_to_campus = true
   netid             = "mynetid"
@@ -68,15 +70,15 @@ terraform destroy
 The bastion is really intended to be ephemeral (spin it up, use it, tear it down). So there's no need for a backend.
 
 ## Input
-| Name | Description | Default Value |
-| --- | --- | --- |
+| Name | Type |Description | Default Value |
+| --- | --- | --- | --- |
 | dept_abbr| string | AWS Account department abbreviation (e.g. oit, trn) | oit |
-| env | Environment of the AWS Account (for finding the shared VPC and tagging the bastion) (e.g. dev, prd)|  |
-| vpc_vpn_to_campus | Set to true if the bastion needs to be in the VPC that has VPN access to campus | false |
-| netid | Your Net ID (for naming the bastion) | |
-| public_key | Public SSH Key (e.g. \"ssh-rsa AA....Qw== comment\"). | |
-| ingress_cidrs | IP Address Ranges that should have access to the bastion. | ["128.187.0.0/16", "10.0.0.0/8"] |
-| subnet_type | Which subnet type sould the bastion launch in? (e.g. public, private, data) | "public" |
+| env | string | Environment of the AWS Account (for finding the shared VPC and tagging the bastion) (e.g. dev, prd)|  |
+| vpc_vpn_to_campus | bool | Set to true if the bastion needs to be in the VPC that has VPN access to campus | false |
+| netid | string | Your Net ID (for naming the bastion) | |
+| public_key | string | Public SSH Key (e.g. \"ssh-rsa AA....Qw== comment\"). | |
+| ingress_cidrs | list(string) | IP Address Ranges that should have access to the bastion. | ["128.187.0.0/16", "10.0.0.0/8"] |
+| subnet_type | string | Which subnet type sould the bastion launch in? (e.g. public, private, data) | "public" |
 
 Notes on `subnet_type`:
 
@@ -85,12 +87,12 @@ Notes on `subnet_type`:
 * If you need a `private` bastion, you'll either need to reach it across the VPN (i.e. be running the dc vpn on your workstation), or spin up a second "public" bastion to go through.
 
 ## Output
-| Name | Description |
-| --- | --- |
-| connect | SSH connection details for the bastion |
-| ec2_instance | The bastion EC2 Instance |
-| security_group | The security group that controls access to the bastion |
-| key_pair | The SSH keypair assigned to the bastion |
+| Name | Type | Description |
+| --- | --- | --- |
+| connect | string |SSH connection details for the bastion |
+| ec2_instance | [object](https://www.terraform.io/docs/providers/aws/r/instance.html#attributes-reference) | The bastion EC2 Instance |
+| security_group | [object](https://www.terraform.io/docs/providers/aws/r/security_group.html#attributes-reference) | The security group that controls access to the bastion |
+| key_pair | [object](https://www.terraform.io/docs/providers/aws/r/key_pair.html#attributes-reference) | The SSH keypair assigned to the bastion |
 
 ## Resources
 * An EC2 Instance (the bastion) in a public subnet

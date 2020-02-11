@@ -4,7 +4,7 @@ provider "aws" {
 }
 
 module "bastion" {
-  source            = "git@github.com:byu-oit/terraform-aws-bastion.git?ref=v1.1.1"
+  source            = "github.com/byu-oit/terraform-aws-bastion.git?ref=v1.1.2"
     #source            = "../../"
   dept_abbr         = "ces"
   env               = "dev"
