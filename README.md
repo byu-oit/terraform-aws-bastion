@@ -37,7 +37,7 @@ provider "aws" {
 }
 
 module "bastion" {
-  source            = "github.com/byu-oit/terraform-aws-bastion.git?ref=v1.1.2"
+  source            = "github.com/byu-oit/terraform-aws-bastion.git?ref=v1.2.0"
   env               = "prd"
   vpc_vpn_to_campus = true
   netid             = "mynetid"
@@ -72,8 +72,7 @@ The bastion is really intended to be ephemeral (spin it up, use it, tear it down
 ## Input
 | Name | Type |Description | Default Value |
 | --- | --- | --- | --- |
-| dept_abbr| string | AWS Account department abbreviation (e.g. oit, trn) | oit |
-| env | string | Environment of the AWS Account (for finding the shared VPC and tagging the bastion) (e.g. dev, prd)|  |
+| env | string | Environment (for tagging the bastion) (e.g. dev, prd)|  |
 | vpc_vpn_to_campus | bool | Set to true if the bastion needs to be in the VPC that has VPN access to campus | false |
 | netid | string | Your Net ID (for naming the bastion) | |
 | public_key | string | Public SSH Key (e.g. \"ssh-rsa AA....Qw== comment\"). | |

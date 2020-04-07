@@ -1,11 +1,6 @@
-variable "dept_abbr" {
-  type = string
-  default = "oit"
-  description = "Abbreviation of the department type of account (e.g. oit, trn), defaults to oit."
-}
 variable "env" {
   type        = string
-  description = "Account environment (for finding the shared VPC and tagging the bastion) (e.g. dev, prd)."
+  description = "Environment (for tagging the bastion) (e.g. dev, prd)."
 }
 
 variable "vpc_vpn_to_campus" {
