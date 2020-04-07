@@ -6,19 +6,11 @@ terraform {
 }
 
 module "acs" {
-  source            = "github.com/byu-oit/terraform-aws-acs-info.git?ref=v1.2.2"
-  dept_abbr         = var.dept_abbr
-  env               = var.env
+  source            = "github.com/byu-oit/terraform-aws-acs-info.git?ref=v2.1.0"
   vpc_vpn_to_campus = var.vpc_vpn_to_campus
 }
 
-resource "aws_instance" "bastion" {
-  ami                    = "ami-0c5204531f799e0c6"
-  instance_type          = "t2.micro"
-  key_name               = aws_key_pair.key.key_name
-  subnet_id              = module.acs["${var.subnet_type}_subnet_ids"][0]
-  vpc_security_group_ids = [aws_security_group.sg.id]
-
+locals {
   tags = {
     Name             = "${var.netid}-bastion"
     app              = "${var.netid}-bastion"
@@ -27,10 +19,20 @@ resource "aws_instance" "bastion" {
   }
 }
 
+resource "aws_instance" "bastion" {
+  ami                    = "ami-0c5204531f799e0c6"
+  instance_type          = "t2.micro"
+  key_name               = aws_key_pair.key.key_name
+  subnet_id              = module.acs["${var.subnet_type}_subnet_ids"][0]
+  vpc_security_group_ids = [aws_security_group.sg.id]
+  tags = local.tags
+}
+
 resource "aws_security_group" "sg" {
   name        = "${var.netid}-bastion"
   description = "${var.netid}-bastion"
   vpc_id      = module.acs.vpc.id
+  tags = local.tags
 
   ingress {
     from_port   = 22
@@ -44,13 +46,6 @@ resource "aws_security_group" "sg" {
     to_port     = 0
     protocol    = "-1"
     cidr_blocks = ["0.0.0.0/0"]
-  }
-
-  tags = {
-    Name             = "${var.netid}-bastion"
-    app              = "${var.netid}-bastion"
-    env              = var.env
-    data-sensitivity = "internal"
   }
 }
 
