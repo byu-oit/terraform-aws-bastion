@@ -5,7 +5,7 @@ provider "aws" {
 
 module "bastion" {
   #source            = "../../"
-  source            = "github.com/byu-oit/terraform-aws-bastion.git?ref=v1.2.0"
+  source            = "github.com/byu-oit/terraform-aws-bastion.git?ref=v1.2.1"
   env               = "dev"
   vpc_vpn_to_campus = false
   netid             = "jgubler"
