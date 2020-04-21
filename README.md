@@ -3,6 +3,10 @@
 # terraform-aws-bastion
 Create a temporary bastion in an AWS Account
 
+**Note** 
+
+> This module automatically looks up the latest AMI each time `terraform apply` is run. This could result in your bastion EC2 instance being replaced. This shouldn't be a problem. The bastion is intended to be short lived. If this is an issue for you, you probably aren't using the bastion the way it is intended to be used.
+
 ## Usage
 
 ### Command Line Example
@@ -37,7 +41,7 @@ provider "aws" {
 }
 
 module "bastion" {
-  source            = "github.com/byu-oit/terraform-aws-bastion.git?ref=v1.2.0"
+  source            = "github.com/byu-oit/terraform-aws-bastion.git?ref=v1.2.1"
   env               = "prd"
   vpc_vpn_to_campus = true
   netid             = "mynetid"

@@ -19,20 +19,24 @@ locals {
   }
 }
 
+data "aws_ssm_parameter" "ami" {
+  name = "/aws/service/ami-amazon-linux-latest/amzn2-ami-hvm-x86_64-gp2"
+}
+
 resource "aws_instance" "bastion" {
-  ami                    = "ami-0c5204531f799e0c6"
+  ami                    = data.aws_ssm_parameter.ami.value
   instance_type          = "t2.micro"
   key_name               = aws_key_pair.key.key_name
   subnet_id              = module.acs["${var.subnet_type}_subnet_ids"][0]
   vpc_security_group_ids = [aws_security_group.sg.id]
-  tags = local.tags
+  tags                   = local.tags
 }
 
 resource "aws_security_group" "sg" {
   name        = "${var.netid}-bastion"
   description = "${var.netid}-bastion"
   vpc_id      = module.acs.vpc.id
-  tags = local.tags
+  tags        = local.tags
 
   ingress {
     from_port   = 22
