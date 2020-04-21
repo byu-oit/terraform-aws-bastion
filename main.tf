@@ -19,8 +19,12 @@ locals {
   }
 }
 
+data "aws_ssm_parameter" "ami" {
+	name = "/aws/service/ami-amazon-linux-latest/amzn2-ami-hvm-x86_64-gp2"
+}
+
 resource "aws_instance" "bastion" {
-  ami                    = "ami-0c5204531f799e0c6"
+  ami                    = data.aws_ssm_parameter.ami.value
   instance_type          = "t2.micro"
   key_name               = aws_key_pair.key.key_name
   subnet_id              = module.acs["${var.subnet_type}_subnet_ids"][0]
