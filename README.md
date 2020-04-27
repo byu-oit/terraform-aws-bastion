@@ -9,29 +9,6 @@ Create a temporary bastion in an AWS Account
 
 ## Usage
 
-### Command Line Example
-Best practice is for the bastion to be short lived. Just long enough to perform some troubleshooting or operational task. Then destroy it.
-
-To accomplish this, you can run this directly on the command line:
-
-```shell
-git clone git@github.com:byu-oit/terraform-aws-bastion.git
-cd terraform-aws-bastion
-terrafrom init
-terraform apply -var "env=prd" -var "vpc_vpn_to_campus=true" -var "netid=mynetid" -var "public_key=$(cat ~/.ssh/id_rsa.pub)"
-
-```
-Which will create the bastion and give you the connection details.
-
-When you're done, run:
-
-```
-terraform destroy -var "env=prd" -var "vpc_vpn_to_campus=true" -var "netid=mynetid" -var "public_key=$(cat ~/.ssh/id_rsa.pub)"
-```
-
-### Module Example
-Alternatively, you can use this template as a module. This way you don't have to clone the repo, and your variables are saved in a template for later use.
-
 In a clean directory, create a `main.tf` file that looks like:
 
 ```hcl
@@ -49,6 +26,38 @@ module "bastion" {
   #ingress_cidrs     = ["128.187.112.21/32"] # optional (defaults to BYU Campus)
   #subnet_type       = private # optional (defaults to public)
 }
+
+# When you use a bastion, you almost always need to add a
+# security group rule to allow that bastion to connect to
+# another resource (RDS, EC2, EFS, etc.). You can do that in
+# Terraform, with an aws_security_group_rule resource.
+/*
+resource "aws_security_group_rule" "bastion_to_rds" {
+  type                     = "ingress"
+  source_security_group_id = module.bastion.security_group.id
+
+  # Different services (mysql, postgress, SSH, EFS, etc) have
+  # different ports. Specify the correct ports here.
+  from_port                = 3306
+  to_port                  = 3306
+  protocol                 = "tcp"
+
+  # You'll need to login to the console and lookup the
+  # Security Group ID for the target resource that your
+  # bastion is going to connect to.
+  security_group_id        = "sg_xxxxxxxxxxxxxx"
+}
+
+output "tunnel_connect" {
+  # You'll need to login to the console and lookup the
+  # Endpoint Address of your RDS instance. If you are
+  # targeting something other than mysql on RDS, update the
+  # host and ports to match your target resource.
+  #
+  # Learn more about SSH Tunneling: https://www.ssh.com/ssh/tunneling/example
+  value = "ssh -L 3306:my_rds_instance_address:3306 ec2-user@${module.bastion.ec2_instance.public_ip}"
+}
+*/
 
 output "connect" {
 	value = module.bastion.connect
