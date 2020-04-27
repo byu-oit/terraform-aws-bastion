@@ -14,6 +14,38 @@ module "bastion" {
   #subnet_type       = "private" # optional (defaults to public) (if anything other than "public", you'll need to use another bastion, vpn, etc. to ssh in.)
 }
 
+# When you use a bastion, you almost always need to add a
+# security group rule to allow that bastion to connect to
+# another resource (RDS, EC2, EFS, etc.). You can do that in
+# Terraform, with an aws_security_group_rule resource.
+/*
+resource "aws_security_group_rule" "bastion_to_rds" {
+  type                     = "ingress"
+  source_security_group_id = module.bastion.security_group.id
+
+  # Different services (mysql, postgress, SSH, EFS, etc) have
+  # different ports. Specify the correct ports here.
+  from_port                = 3306
+  to_port                  = 3306
+  protocol                 = "tcp"
+
+  # You'll need to login to the console and lookup the
+  # Security Group ID for the target resource that your
+  # bastion is going to connect to.
+  security_group_id        = "sg_xxxxxxxxxxxxxx"
+}
+
+output "tunnel_connect" {
+  # You'll need to login to the console and lookup the
+  # Endpoint Address of your RDS instance. If you are
+  # targeting something other than mysql on RDS, update the
+  # host and ports to match your target resource.
+  #
+  # Learn more about SSH Tunneling: https://www.ssh.com/ssh/tunneling/example
+  value = "ssh -L 3306:my_rds_instance_address:3306 ec2-user@${module.bastion.ec2_instance.public_ip}"
+}
+*/
+
 output "connect" {
   value = module.bastion.connect
 }
