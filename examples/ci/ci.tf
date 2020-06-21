@@ -8,7 +8,7 @@ provider "aws" {
 }
 
 module "bastion" {
-  source = "../../"
+  source            = "../../"
   env               = "dev"
   vpc_vpn_to_campus = false
   netid             = "githubac"
