@@ -18,7 +18,7 @@ provider "aws" {
 }
 
 module "bastion" {
-  source            = "github.com/byu-oit/terraform-aws-bastion.git?ref=v1.2.1"
+  source            = "github.com/byu-oit/terraform-aws-bastion.git?ref=v1.3.0"
   env               = "prd"
   vpc_vpn_to_campus = true
   netid             = "mynetid"
@@ -110,3 +110,9 @@ Notes on `subnet_type`:
 * An EC2 Instance (the bastion) in a public subnet
 * A Security Group allowing SSH on port 22 from campus
 * A keypair using the public key input variable (granting access to the EC2 instance)
+
+## Developing
+
+### Release new version
+
+To release a new version, update the examples in the `examples` folder, the example in this README, and the number in the version file. Pushing to `master` will automatically create a new release and tag in GitHub.
