@@ -18,7 +18,7 @@ provider "aws" {
 }
 
 module "bastion" {
-  source            = "github.com/byu-oit/terraform-aws-bastion.git?ref=v1.2.1"
+  source            = "github.com/byu-oit/terraform-aws-bastion.git?ref=v2.0.0"
   env               = "prd"
   vpc_vpn_to_campus = true
   netid             = "mynetid"
