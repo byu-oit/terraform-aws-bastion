@@ -12,7 +12,7 @@ locals {
 }
 
 module "public_bastion" {
-  source            = "github.com/byu-oit/terraform-aws-bastion.git?ref=v1.2.1"
+  source            = "github.com/byu-oit/terraform-aws-bastion.git?ref=v2.0.0"
   env               = local.env
   vpc_vpn_to_campus = true
   netid             = "${local.netid}-public"
@@ -23,7 +23,7 @@ module "public_bastion" {
 
 
 module "private_bastion" {
-  source            = "git@github.com:byu-oit/terraform-aws-bastion.git?ref=v1.2.1"
+  source            = "git@github.com:byu-oit/terraform-aws-bastion.git?ref=v2.0.0"
   env               = local.env
   vpc_vpn_to_campus = true
   netid             = "${local.netid}-private"
