@@ -13,7 +13,7 @@ In a clean directory, create a `main.tf` file that looks like:
 
 ```hcl
 provider "aws" {
-  version = "~> 2.42.0"
+  version = "~> 3.0"
   region  = "us-west-2"
 }
 
