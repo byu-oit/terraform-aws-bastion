@@ -26,7 +26,7 @@ jobs:
                 "tf_working_dir":"./examples/ci-0_13",
                 "aws_key_name":"byu_oit_terraform_dev_key",
                 "aws_secret_name":"byu_oit_terraform_dev_secret"
-              }
+              },
               {
                 "tf_version":"0.14.11",
                 "tf_working_dir":"./examples/ci-0_14",
