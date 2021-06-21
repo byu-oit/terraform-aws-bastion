@@ -29,3 +29,9 @@ variable "subnet_type" {
   default     = "public"
   description = "Which subnet type should the bastion launch in? (e.g. public, private, data)"
 }
+
+variable "instance_type" {
+  type        = string
+  default     = "t3.micro"
+  description = "The EC2 instance type to deploy (defaults to t3.micro)"
+}

@@ -25,7 +25,7 @@ data "aws_ssm_parameter" "ami" {
 
 resource "aws_instance" "bastion" {
   ami                    = data.aws_ssm_parameter.ami.value
-  instance_type          = "t2.micro"
+  instance_type          = var.instance_type
   key_name               = aws_key_pair.key.key_name
   subnet_id              = module.acs["${var.subnet_type}_subnet_ids"][0]
   vpc_security_group_ids = [aws_security_group.sg.id]
