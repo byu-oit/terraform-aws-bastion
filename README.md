@@ -117,13 +117,13 @@ Notes on `subnet_type`:
 
 ## Output
 
-| Name           | Type                                                                                                                      | Description                                                   |
-|:---------------|:--------------------------------------------------------------------------------------------------------------------------|:--------------------------------------------------------------|
-| connect        | string                                                                                                                    | SSH connection details for the bastion                        |
-| ec2_instance   | [object](https://www.terraform.io/docs/providers/aws/r/instance.html#attributes-reference)                                | The bastion EC2 Instance                                      |
-| security_group | [object](https://www.terraform.io/docs/providers/aws/r/security_group.html#attributes-reference)                          | The security group that controls access to the bastion        |
-| key_pair       | [object](https://www.terraform.io/docs/providers/aws/r/key_pair.html#attributes-reference)                                | The SSH keypair assigned to the bastion                       |
-| route53_record | [object](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/route53_record#attributes-reference) | The Route53 "A" Record to alias the bastion public IP address |
+| Name           | Type                                                                                                                      | Description                                                              |
+|:---------------|:--------------------------------------------------------------------------------------------------------------------------|:-------------------------------------------------------------------------|
+| connect        | string                                                                                                                    | SSH connection details for the bastion                                   |
+| ec2_instance   | [object](https://www.terraform.io/docs/providers/aws/r/instance.html#attributes-reference)                                | The bastion EC2 Instance                                                 |
+| security_group | [object](https://www.terraform.io/docs/providers/aws/r/security_group.html#attributes-reference)                          | The security group that controls access to the bastion                   |
+| key_pair       | [object](https://www.terraform.io/docs/providers/aws/r/key_pair.html#attributes-reference)                                | The SSH keypair assigned to the bastion                                  |
+| route53_record | [object](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/route53_record#attributes-reference) | The Route53 "A" Record to alias the bastion public or private IP address |
 
 ## Resources
 
@@ -131,4 +131,4 @@ Notes on `subnet_type`:
 * A Security Group allowing SSH on port 22 from campus
 * A keypair using the public key input variable (granting access to the
   EC2 instance)
-
+* A Route53 entry to alias the bastion public or private ip address
