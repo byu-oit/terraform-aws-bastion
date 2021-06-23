@@ -33,5 +33,17 @@ variable "subnet_type" {
 variable "instance_type" {
   type        = string
   default     = "t3.micro"
-  description = "The EC2 instance type to deploy (defaults to t3.micro)"
+  description = "The EC2 instance type to deploy (defaults to t3.micro)."
+}
+
+variable "site_url" {
+  type        = string
+  default     = null
+  description = "The static URL to use as an alias to the bastion host address (defaults to {var.netid}-bastion.{module.acs.route53_zone.name})."
+}
+
+variable "site_zone_id" {
+  type        = string
+  default     = null
+  description = "The ID of the hosted zone to contain the site_url record (defaults to module.acs.route53_zone.zone_id)."
 }

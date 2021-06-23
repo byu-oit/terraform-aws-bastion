@@ -13,3 +13,7 @@ output "security_group" {
 output "key_pair" {
   value = aws_key_pair.key
 }
+
+output "route53_record" {
+  value = aws_route53_record.a_record
+}

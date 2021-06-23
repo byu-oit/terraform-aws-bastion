@@ -17,8 +17,12 @@ locals {
     env              = var.env
     data-sensitivity = "internal"
   }
+
+  app_domain_name = var.site_url != null ? var.site_url : "${var.netid}-bastion.${module.acs.route53_zone.name}"
+  app_zone_id     = var.site_url != null && var.site_zone_id != null ? var.site_zone_id : module.acs.route53_zone.zone_id
 }
 
+# ==================== Bastion ====================
 data "aws_ssm_parameter" "ami" {
   name = "/aws/service/ami-amazon-linux-latest/amzn2-ami-hvm-x86_64-gp2"
 }
@@ -56,4 +60,12 @@ resource "aws_security_group" "sg" {
 resource "aws_key_pair" "key" {
   key_name   = "${var.netid}-bastion"
   public_key = var.public_key
+}
+
+# ==================== Route53 ====================
+resource "aws_route53_record" "a_record" {
+  name    = local.app_domain_name
+  type    = "A"
+  zone_id = local.app_zone_id
+  records = [aws_instance.bastion.public_ip]
 }
