@@ -60,7 +60,7 @@ output "tunnel_connect" {
   # host and ports to match your target resource.
   #
   # Learn more about SSH Tunneling: https://www.ssh.com/ssh/tunneling/example
-  value = "ssh -L 3306:my_rds_instance_address:3306 ec2-user@${module.bastion.ec2_instance.public_ip}"
+  value = "ssh -L 3306:my_rds_instance_address:3306 ec2-user@${module.bastion.route53_record.name}"
 }
 */
 
