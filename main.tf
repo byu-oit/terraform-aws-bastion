@@ -67,5 +67,5 @@ resource "aws_route53_record" "a_record" {
   name    = local.app_domain_name
   type    = "A"
   zone_id = local.app_zone_id
-  records = [aws_instance.bastion.public_ip]
+  records = [length(aws_instance.bastion.public_ip) > 0 ? aws_instance.bastion.public_ip : aws_instance.bastion.private_ip]
 }

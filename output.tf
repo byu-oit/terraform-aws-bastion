@@ -1,5 +1,5 @@
 output "connect" {
-  value = "ssh ec2-user@${length(aws_instance.bastion.public_ip) > 0 ? aws_instance.bastion.public_ip : aws_instance.bastion.private_ip}"
+  value = "ssh ec2-user@${aws_route53_record.a_record.name}"
 }
 
 output "ec2_instance" {
