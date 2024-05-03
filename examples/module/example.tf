@@ -1,11 +1,11 @@
 provider "aws" {
-  version = "~> 3.0"
+  version = "~> 4.2"
   region  = "us-west-2"
 }
 
 module "bastion" {
   #source            = "../../"
-  source            = "github.com/byu-oit/terraform-aws-bastion.git?ref=v2.0.0"
+  source            = "github.com/byu-oit/terraform-aws-bastion.git?ref=v2.2.2"
   env               = "dev"
   vpc_vpn_to_campus = false
   netid             = "jgubler"
