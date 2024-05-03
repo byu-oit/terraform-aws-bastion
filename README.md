@@ -18,12 +18,12 @@ In a clean directory, create a `main.tf` file that looks like:
 
 ```hcl
 provider "aws" {
-  version = "~> 3.0"
+  version = "~> 5.0"
   region  = "us-west-2"
 }
 
 module "bastion" {
-  source            = "github.com/byu-oit/terraform-aws-bastion.git?ref=v2.2.1"
+  source            = "github.com/byu-oit/terraform-aws-bastion.git?ref=v2.2.2"
   env               = "prd"
   vpc_vpn_to_campus = true
   netid             = "mynetid"
