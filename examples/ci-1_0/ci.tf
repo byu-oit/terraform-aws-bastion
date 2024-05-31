@@ -1,9 +1,9 @@
 terraform {
-  required_version = "1.0.0"
+  required_version = "1.8.0"
   required_providers {
     aws = {
       source  = "hashicorp/aws"
-      version = "~> 3.0"
+      version = "~> 4.2"
     }
   }
 }
@@ -25,7 +25,8 @@ output "connect" {
 }
 
 output "ec2_instance" {
-  value = module.bastion.ec2_instance
+  sensitive = true
+  value     = module.bastion.ec2_instance
 }
 
 output "security_group" {
@@ -33,5 +34,6 @@ output "security_group" {
 }
 
 output "key_pair" {
-  value = module.bastion.key_pair
+  sensitive = true
+  value     = module.bastion.key_pair
 }

@@ -16,31 +16,7 @@ jobs:
           matrix='{
             "env":[
               {
-                "tf_version":"0.12.26",
-                "tf_working_dir":"./examples/ci-0_12",
-                "aws_account":"977306314792",
-                "aws_gha_role":"terraform-bastion-dev-gha"
-              },
-              {
-                "tf_version":"0.13.2",
-                "tf_working_dir":"./examples/ci-0_13",
-                "aws_account":"977306314792",
-                "aws_gha_role":"terraform-bastion-dev-gha"
-              },
-              {
-                "tf_version":"0.14.11",
-                "tf_working_dir":"./examples/ci-0_14",
-                "aws_account":"977306314792",
-                "aws_gha_role":"terraform-bastion-dev-gha"
-              },
-              {
-                "tf_version":"0.15.5",
-                "tf_working_dir":"./examples/ci-0_15",
-                "aws_account":"977306314792",
-                "aws_gha_role":"terraform-bastion-dev-gha"
-              },
-              {
-                "tf_version":"1.0.0",
+                "tf_version":"1.8.0",
                 "tf_working_dir":"./examples/ci-1_0",
                 "aws_account":"977306314792",
                 "aws_gha_role":"terraform-bastion-dev-gha"
@@ -59,10 +35,10 @@ jobs:
     strategy:
       matrix: ${{ fromJson(needs.env.outputs.matrix) }}
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: Terraform Setup
-        uses: hashicorp/setup-terraform@v2
+        uses: hashicorp/setup-terraform@v3
         with:
           terraform_version: ${{ matrix.env.tf_version }}
 
@@ -82,17 +58,17 @@ jobs:
       pull-requests: write
       id-token: write
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: Configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@v2
+        uses: aws-actions/configure-aws-credentials@v4
         with:
           role-to-assume: "arn:aws:iam::${{ matrix.env.aws_account }}:role/${{ matrix.env.aws_gha_role }}"
           role-session-name: ${{ github.sha }}
           aws-region: us-west-2
 
       - name: Terraform Setup
-        uses: hashicorp/setup-terraform@v2
+        uses: hashicorp/setup-terraform@v3
         with:
           terraform_version: ${{ matrix.env.tf_version }}
 

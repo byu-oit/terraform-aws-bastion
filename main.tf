@@ -1,12 +1,12 @@
 terraform {
-  required_version = ">= 0.12.16"
+  required_version = ">= 1.0.0"
   required_providers {
-    aws = ">= 3.0"
+    aws = ">= 4.2"
   }
 }
 
 module "acs" {
-  source            = "github.com/byu-oit/terraform-aws-acs-info.git?ref=v3.2.0"
+  source            = "github.com/byu-oit/terraform-aws-acs-info.git?ref=v4.0.0"
   vpc_vpn_to_campus = var.vpc_vpn_to_campus
 }
 
